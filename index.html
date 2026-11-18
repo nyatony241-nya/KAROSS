@@ -63,9 +63,9 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .logo-mark{width:38px;height:38px;flex:none}
 .logo-word{display:flex;flex-direction:column;line-height:1}
 .logo-word b{font:800 25px/1 var(--display);letter-spacing:.06em}
-.logo-word small{font:500 9.5px/1 var(--mono);letter-spacing:.14em;color:var(--signal);margin-top:4px}
+.logo-word small{font:500 9.5px/1 var(--mono);letter-spacing:.14em;color:var(--signal);margin-top:4px;white-space:nowrap}
 .nav{display:none;gap:26px;font-weight:600;font-size:14.5px}
-.nav a{text-decoration:none;color:rgba(255,255,255,.78)}
+.nav a{text-decoration:none;color:rgba(255,255,255,.78);white-space:nowrap}
 .nav a:hover{color:#fff}
 .list-btn{position:relative;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;font-weight:700;font-size:14px;cursor:pointer}
 .list-btn svg{width:19px;height:19px}
@@ -365,7 +365,9 @@ footer a:hover{color:#fff}
 }
 /* ---------- Bureau ---------- */
 @media (min-width:1040px){
+  .nav{gap:clamp(14px,1.6vw,26px)}
   .nav{display:flex}
+  .list-btn{white-space:nowrap}
   .top .btn-wa{display:inline-flex}
   .top .wrap{gap:22px}
   .logo{margin-right:20px}
