@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAROSS Carrosserie Auto</title>
+<meta name="description" content="KAROSS : pièces de carrosserie en acier importées directement de Chine et livrées au Gabon. Capots, ailes, portières, hayons, caisses complètes. Demande de prix sur WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFC21A'/%3E%3Cpath d='M18 14v36M18 33l18-19h10M24 27l20 23' stroke='%23111' stroke-width='7' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Direction : catalogue de pièces "constructeur". Graphite + jaune signal, dessins techniques au trait,
+   références en police mono. Mobile d'abord : une colonne, puis grille 2 / 3 / 4 colonnes. */
+:root{
+  --ink:#0E1216;          /* graphite : hero, en-tête, vignettes */
+  --panel:#182028;        /* panneaux sur fond sombre */
+  --paper:#EDEFF0;        /* fond clair du catalogue */
+  --card:#FFFFFF;
+  --text:#15191D;
+  --muted:#5E6973;
+  --line:#D5DADE;
+  --signal:#FFC21A;       /* jaune signal : l'accent unique */
+  --signal-deep:#E0A500;
+  --wa:#17A653;           /* vert WhatsApp, réservé aux boutons de contact */
+  --wa-deep:#0F8A43;
+  --display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:14px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--text);font:400 16px/1.55 var(--body);overflow-x:hidden}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:2px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 18px}
+.mono{font-family:var(--mono)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Boutons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 22px;border-radius:12px;border:0;font-weight:800;font-size:15px;letter-spacing:.01em;text-decoration:none;cursor:pointer;transition:transform .15s ease,background .15s ease,box-shadow .15s ease}
+.btn:active{transform:translateY(1px)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-signal{background:var(--signal);color:#111}
+.btn-signal:hover{background:#FFD04D}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 6px 18px -8px rgba(23,166,83,.7)}
+.btn-wa:hover{background:var(--wa-deep)}
+.btn-ghost{background:transparent;color:inherit;border:1.5px solid currentColor}
+.btn-ghost-dark{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-ghost-dark:hover{border-color:#fff}
+.btn-block{width:100%}
+
+/* ---------- En-tête ---------- */
+.top{position:sticky;top:0;z-index:40;background:rgba(14,18,22,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;margin-right:auto}
+.logo-mark{width:38px;height:38px;flex:none}
+.logo-word{display:flex;flex-direction:column;line-height:1}
+.logo-word b{font:800 25px/1 var(--display);letter-spacing:.06em}
+.logo-word small{font:500 9.5px/1 var(--mono);letter-spacing:.14em;color:var(--signal);margin-top:4px}
+.nav{display:none;gap:26px;font-weight:600;font-size:14.5px}
+.nav a{text-decoration:none;color:rgba(255,255,255,.78)}
+.nav a:hover{color:#fff}
+.list-btn{position:relative;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;font-weight:700;font-size:14px;cursor:pointer}
+.list-btn svg{width:19px;height:19px}
+.list-btn .lbl{display:none}
+.badge{min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--signal);color:#111;font:700 11.5px/20px var(--mono);text-align:center}
+.top .btn-wa{display:none;min-height:42px;padding:0 16px;font-size:14px}
+
+/* ---------- Hero ---------- */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(180deg,#000 40%,transparent);-webkit-mask-image:linear-gradient(180deg,#000 40%,transparent);pointer-events:none}
+.hero .wrap{position:relative;display:grid;gap:30px;padding-top:34px;padding-bottom:40px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 11.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--signal)}
+.eyebrow i{display:inline-block;width:22px;height:2px;background:var(--signal)}
+.hero h1{font:800 clamp(42px,11.5vw,84px)/.92 var(--display);text-transform:uppercase;letter-spacing:.005em;margin:16px 0 18px}
+.hero h1 em{font-style:normal;color:var(--signal)}
+.hero-lead{color:rgba(255,255,255,.76);font-size:16.5px;max-width:34em;margin:0 0 24px}
+.finder{background:var(--panel);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px;display:grid;gap:10px}
+.finder-title{font:700 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin:2px 0 4px}
+.finder-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field-dark{position:relative}
+.field-dark select{appearance:none;-webkit-appearance:none;width:100%;height:52px;padding:0 36px 0 14px;border-radius:12px;background:#0E1419;border:1px solid rgba(255,255,255,.14);color:#fff;font-weight:600;font-size:15px}
+.field-dark::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;border-right:2px solid var(--signal);border-bottom:2px solid var(--signal);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.hero-stats{display:flex;gap:22px;margin-top:22px;flex-wrap:wrap}
+.hero-stats div{display:flex;flex-direction:column}
+.hero-stats b{font:800 30px/1 var(--display);color:#fff}
+.hero-stats span{font-size:12.5px;color:rgba(255,255,255,.6);margin-top:4px}
+
+/* Schéma du véhicule */
+.diagram{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:14px 12px 12px}
+.diagram-head{display:flex;justify-content:space-between;align-items:center;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:2px 4px 6px}
+.diagram svg.car{width:100%;height:auto}
+.car .ln{fill:none;stroke:#E9EDF0;stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+.car .ln-soft{fill:none;stroke:rgba(233,237,240,.38);stroke-width:1.6;stroke-linecap:round}
+.car .glass{fill:rgba(120,160,190,.13)}
+.car .part{fill:rgba(255,194,26,.07);stroke:var(--signal);stroke-width:2.4;stroke-linejoin:round}
+.car .draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 1.6s ease-out .2s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hot{cursor:pointer}
+.hot circle.dot{fill:var(--signal);stroke:#0E1216;stroke-width:3}
+.hot circle.pulse{fill:none;stroke:var(--signal);stroke-width:2;opacity:.6;transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-out infinite}
+.hot text{font:700 14px var(--mono);fill:#111;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.hot:hover circle.dot,.hot:focus-visible circle.dot{fill:#fff}
+@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.1);opacity:0}}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.legend button{display:flex;align-items:center;gap:9px;min-height:42px;padding:6px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:#fff;font-weight:600;font-size:13.5px;text-align:left;cursor:pointer}
+.legend button:hover{border-color:var(--signal)}
+.legend .n{width:22px;height:22px;border-radius:50%;background:var(--signal);color:#111;font:700 11.5px/22px var(--mono);text-align:center;flex:none}
+
+/* Bandeau confiance */
+.trust{background:#090C0F;color:#fff;border-top:1px solid rgba(255,255,255,.06)}
+.trust .wrap{display:grid;grid-template-columns:1fr 1fr;gap:1px;padding:0;background:rgba(255,255,255,.07)}
+.trust-item{background:#090C0F;display:flex;gap:12px;align-items:flex-start;padding:18px}
+.trust-item svg{width:26px;height:26px;flex:none;color:var(--signal)}
+.trust-item b{display:block;font-size:14.5px}
+.trust-item span{display:block;font-size:12.5px;color:rgba(255,255,255,.58);line-height:1.4;margin-top:2px}
+
+/* ---------- Sections ---------- */
+section{scroll-margin-top:70px}
+.sec{padding:56px 0}
+.sec-head{display:grid;gap:10px;margin-bottom:26px}
+.sec-head .eyebrow{color:#9A6F00}
+.sec-head .eyebrow i{background:var(--signal-deep)}
+.sec h2{font:800 clamp(34px,8vw,54px)/.95 var(--display);text-transform:uppercase}
+.sec-head p{margin:0;color:var(--muted);max-width:40em}
+
+/* Filtres catalogue */
+.filters{position:sticky;top:64px;z-index:20;background:var(--paper);padding:10px 0 12px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.filter-row{display:grid;grid-template-columns:1fr;gap:10px}
+.search{position:relative}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:19px;height:19px;color:var(--muted)}
+.search input{width:100%;height:50px;border-radius:12px;border:1.5px solid var(--line);background:#fff;padding:0 14px 0 44px;font-size:15.5px}
+.search input:focus{border-color:var(--text);outline:none}
+.selects{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field-light{position:relative}
+.field-light select{appearance:none;-webkit-appearance:none;width:100%;height:50px;border-radius:12px;border:1.5px solid var(--line);background:#fff;padding:0 34px 0 14px;font-weight:600;font-size:14.5px}
+.field-light::after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;border-right:2px solid var(--text);border-bottom:2px solid var(--text);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 18px 2px;margin:0 -18px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:13.5px;cursor:pointer;white-space:nowrap}
+.chip .c{font:500 11px var(--mono);color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip[aria-pressed="true"] .c{color:var(--signal)}
+.result-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0 14px;font-size:14px;color:var(--muted)}
+.result-bar b{color:var(--text)}
+.linkbtn{background:none;border:0;padding:6px 0;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer;color:var(--text);font-size:14px}
+
+/* Marques */
+.brand-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.brand-tile{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:64px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;text-align:left;transition:border-color .15s ease,transform .15s ease}
+.brand-tile:hover{border-color:var(--text);transform:translateY(-2px)}
+.brand-tile b{font:800 19px/1.05 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.brand-tile span{font:500 11.5px var(--mono);color:var(--muted)}
+.more-wrap{display:flex;justify-content:center;margin-top:22px}
+#more,#brands-more{color:var(--text)}
+/* Cartes produits */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--card);border-radius:var(--r);border:1px solid var(--line);overflow:hidden;display:flex;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(14,18,22,.45);border-color:#B9C1C8}
+.card-hit{all:unset;box-sizing:border-box;display:flex;flex-direction:column;width:100%;cursor:pointer}
+.card-hit:focus-visible{outline:3px solid var(--signal);outline-offset:-3px}
+.card-media{position:relative;background:var(--ink);aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden}
+.card-media::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:16px 16px}
+.card-media svg{position:relative;width:78%;height:auto;color:var(--signal)}
+.card-media.has-photo{background:#fff;border-bottom:1px solid var(--line)}
+.card-media.has-photo::before{display:none}
+.card-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;transition:transform .3s ease}
+.ph{background-repeat:no-repeat;background-size:200% 600%;aspect-ratio:1/1}
+.card-media .ph{position:absolute;top:6px;bottom:6px;left:50%;transform:translateX(-50%);transition:transform .3s ease}
+.card:hover .card-media .ph{transform:translateX(-50%) scale(1.04)}
+.sheet-media .ph{position:relative;width:min(100%,420px)}
+.li-ico .ph{height:100%}
+.card-media.has-photo .ref{background:var(--ink);border-color:var(--ink)}
+.ref{position:absolute;left:8px;top:8px;font:700 10.5px/1 var(--mono);letter-spacing:.04em;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.18);padding:5px 7px;border-radius:6px}
+.tag{position:absolute;right:8px;top:8px;font:700 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;background:var(--signal);color:#111;padding:5px 7px;border-radius:6px}
+.card-body{padding:12px 12px 4px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card-cat{font:500 10.5px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0}
+.card h3{font:700 15px/1.25 var(--body);margin:2px 0 2px}
+.card-fit{margin:0;font-size:12.5px;color:var(--muted);line-height:1.35}
+.card-foot{padding:10px 12px 12px}
+.card-cta{display:flex;align-items:center;justify-content:center;gap:6px;height:40px;border-radius:10px;background:var(--paper);font-weight:800;font-size:13px;transition:background .15s ease}
+.card:hover .card-cta{background:var(--signal)}
+.empty{grid-column:1/-1;background:#fff;border:1.5px dashed var(--line);border-radius:var(--r);padding:28px 20px;text-align:center}
+.empty p{margin:6px 0 16px;color:var(--muted)}
+
+/* Sur mesure */
+.custom{background:var(--ink);color:#fff;border-radius:22px;padding:26px 18px;display:grid;gap:22px;margin-top:40px}
+.custom h3{font:800 clamp(28px,7vw,42px)/.95 var(--display);text-transform:uppercase}
+.custom h3 em{font-style:normal;color:var(--signal)}
+.custom p{color:rgba(255,255,255,.72);margin:10px 0 0}
+.custom form{display:grid;gap:10px}
+.custom .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inp-dark{width:100%;height:50px;border-radius:12px;background:#0B1014;border:1px solid rgba(255,255,255,.16);color:#fff;padding:0 14px;font-size:15px}
+textarea.inp-dark{height:auto;min-height:84px;padding:12px 14px;resize:vertical}
+.inp-dark::placeholder{color:rgba(255,255,255,.4)}
+.inp-dark:focus{border-color:var(--signal);outline:none}
+.custom .hint{font-size:12.5px;color:rgba(255,255,255,.5);margin:2px 0 0}
+
+/* Étapes */
+.steps{display:grid;gap:12px;counter-reset:s}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:start}
+.step .num{grid-row:span 2;font:800 46px/.85 var(--display);color:var(--signal-deep)}
+.step h3{font:800 22px/1.05 var(--display);text-transform:uppercase}
+.step p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* Avantages */
+.why{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.why-grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.why-item{background:#fff;padding:22px 20px;display:grid;gap:8px}
+.why-item svg{width:30px;height:30px;color:var(--text)}
+.why-item h3{font:700 17px/1.25 var(--body)}
+.why-item p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* Bureaux */
+.offices{display:grid;gap:14px}
+.office{position:relative;background:var(--ink);color:#fff;border-radius:18px;padding:22px;overflow:hidden}
+.office .flagbar{display:flex;height:5px;width:64px;border-radius:3px;overflow:hidden;margin-bottom:16px}
+.office .flagbar i{flex:1}
+.office h3{font:800 30px/1 var(--display);text-transform:uppercase}
+.office .city{font:500 12px var(--mono);letter-spacing:.06em;color:var(--signal);margin:6px 0 14px;text-transform:uppercase}
+.office ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.office li{display:flex;gap:10px;font-size:14.5px;color:rgba(255,255,255,.82)}
+.office li::before{content:"";flex:none;width:8px;height:8px;margin-top:8px;background:var(--signal);transform:rotate(45deg)}
+.route{display:flex;align-items:center;gap:10px;justify-content:center;font:700 12px var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.route .dash{flex:1;max-width:120px;height:0;border-top:2px dashed #AAB3BA}
+
+/* FAQ */
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px}
+.faq summary{list-style:none;cursor:pointer;padding:18px 48px 18px 18px;font-weight:700;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);font:700 22px var(--mono);color:var(--signal-deep)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0;padding:0 18px 18px;color:var(--muted)}
+
+/* Bande CTA finale */
+.cta-band{background:var(--signal);color:#111}
+.cta-band .wrap{padding-top:40px;padding-bottom:40px;display:grid;gap:18px}
+.cta-band h2{font:800 clamp(34px,9vw,58px)/.92 var(--display);text-transform:uppercase}
+.cta-band p{margin:0;font-weight:500;max-width:36em}
+.cta-band .btn-dark{background:#111;color:#fff}
+.cta-band .btn-dark:hover{background:#000}
+
+/* Pied de page */
+footer{background:var(--ink);color:rgba(255,255,255,.7);font-size:14px;padding:40px 0 110px}
+footer .wrap{display:grid;gap:24px}
+footer h4{margin:0 0 10px;color:#fff;font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+footer a{text-decoration:none}
+footer a:hover{color:#fff}
+.legal{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;font-size:12.5px;color:rgba(255,255,255,.45)}
+
+/* Barre mobile fixe */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:45;display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(14,18,22,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.1)}
+.dock .list-btn{height:50px}
+.dock .btn{min-height:50px}
+.fab{display:none}
+
+/* ---------- Fiche produit (bottom sheet) ---------- */
+.backdrop{position:fixed;inset:0;z-index:60;background:rgba(6,9,12,.62);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.backdrop.open{opacity:1;pointer-events:auto}
+.sheet{position:relative;background:#fff;width:100%;max-height:94vh;max-height:94dvh;border-radius:22px 22px 0 0;overflow:auto;transform:translateY(30px);transition:transform .25s ease;overscroll-behavior:contain}
+.backdrop.open .sheet{transform:none}
+.sheet-media{position:relative;background:var(--ink);padding:44px 20px 22px;display:grid;place-items:center}
+.sheet-media svg{width:min(76%,330px);color:var(--signal);position:relative}
+.sheet-media::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:18px 18px}
+.sheet-media.has-photo{background:#fff;border-bottom:1px solid var(--line)}
+.sheet-media.has-photo::before{display:none}
+.sheet-media.has-photo .grabber{background:var(--line)}
+.sheet-media img{position:relative;width:100%;max-width:420px;max-height:46vh;object-fit:contain}
+.grabber{position:absolute;top:10px;left:50%;width:44px;height:5px;border-radius:3px;background:rgba(255,255,255,.3);transform:translateX(-50%)}
+.close{position:absolute;right:12px;top:12px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(14,18,22,.75);color:#fff;cursor:pointer;display:grid;place-items:center;z-index:2}
+.close svg{width:20px;height:20px}
+.sheet-body{padding:20px 18px 26px;display:grid;gap:18px}
+.sheet-body .ref{position:static;display:inline-block;background:var(--paper);color:var(--text);border-color:var(--line)}
+.sheet-title{font:800 clamp(28px,7vw,38px)/.98 var(--display);text-transform:uppercase;margin-top:10px}
+.sheet-desc{margin:8px 0 0;color:var(--muted);font-size:15px}
+.form{display:grid;gap:14px}
+.f label,.f .lab{display:block;font-weight:700;font-size:13.5px;margin-bottom:6px}
+.f .opt{font-weight:500;color:var(--muted)}
+.f input,.f select,.f textarea{width:100%;height:50px;border-radius:12px;border:1.5px solid var(--line);background:#fff;padding:0 14px;font-size:15.5px}
+.f textarea{height:auto;min-height:76px;padding:12px 14px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--text);outline:none}
+.f.sel{position:relative}
+.f.sel select{appearance:none;-webkit-appearance:none;padding-right:34px}
+.f.sel::after{content:"";position:absolute;right:15px;bottom:21px;width:7px;height:7px;border-right:2px solid var(--text);border-bottom:2px solid var(--text);transform:rotate(45deg);pointer-events:none}
+.f-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{margin:0;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:10px;border:1.5px solid var(--line);font-weight:700;font-size:14px;cursor:pointer;background:#fff}
+.seg input:checked+label{background:var(--ink);border-color:var(--ink);color:#fff}
+.seg input:focus-visible+label{outline:3px solid var(--signal);outline-offset:2px}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;height:50px}
+.qty button{width:50px;height:100%;border:0;background:var(--paper);font:700 20px var(--mono);cursor:pointer}
+.qty input{width:56px;height:100%;border:0;text-align:center;font:700 16px var(--mono);border-radius:0;padding:0}
+.preview{background:#E7F6EC;border:1px solid #BFE5CC;border-radius:14px;padding:14px}
+.preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;font-size:12.5px;font-weight:700;color:#0E6B35}
+.preview pre{margin:0;white-space:pre-wrap;word-break:break-word;font:500 12.5px/1.55 var(--mono);color:#123}
+.actions{display:grid;gap:10px;position:sticky;bottom:0;background:#fff;padding:12px 0 calc(4px + env(safe-area-inset-bottom));border-top:1px solid var(--line);margin:0 -18px;padding-left:18px;padding-right:18px}
+.actions-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-line{background:#fff;color:var(--text);border:1.5px solid var(--line);min-height:46px;font-size:14px}
+.btn-line:hover{border-color:var(--text)}
+
+/* Liste de devis (tiroir) */
+.drawer{background:#fff;width:100%;max-height:92vh;max-height:92dvh;border-radius:22px 22px 0 0;overflow:auto;transform:translateY(30px);transition:transform .25s ease}
+.backdrop.open .drawer{transform:none}
+.drawer-head{position:sticky;top:0;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:18px 18px 12px;border-bottom:1px solid var(--line);z-index:2}
+.drawer-head h2{font:800 28px/1 var(--display);text-transform:uppercase}
+.drawer-head .close{position:static;background:var(--paper);color:var(--text)}
+.drawer-body{padding:16px 18px 24px;display:grid;gap:14px}
+.li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:12px}
+.li-ico{width:52px;height:52px;border-radius:8px;background:var(--ink);display:grid;place-items:center}
+.li-ico svg{width:46px;color:var(--signal)}
+.li-ico.has-photo{background:#fff;border:1px solid var(--line)}
+.li-ico img{width:100%;height:100%;object-fit:contain;padding:3px}
+.li b{display:block;font-size:14.5px;line-height:1.3}
+.li span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.li .rm{border:0;background:none;color:var(--muted);cursor:pointer;width:36px;height:36px;border-radius:8px}
+.li .rm:hover{background:var(--paper);color:#B42318}
+.li .rm svg{width:18px;height:18px;margin:auto}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:92px;z-index:80;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:all .25s ease;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);display:flex;gap:10px;align-items:center;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast i{width:8px;height:8px;background:var(--signal);transform:rotate(45deg)}
+
+/* ---------- Tablette ---------- */
+@media (min-width:720px){
+  .wrap{padding:0 28px}
+  .chips{padding:12px 28px 2px;margin:0 -28px}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .brand-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .trust .wrap{grid-template-columns:repeat(4,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .offices{grid-template-columns:1fr auto 1fr;align-items:stretch}
+  .route{flex-direction:column}
+  .route .dash{border-top:0;border-left:2px dashed #AAB3BA;height:60px;max-width:none;flex:none}
+  .legend{grid-template-columns:repeat(3,1fr)}
+  .filter-row{grid-template-columns:1.4fr 1fr}
+  .custom{padding:36px;grid-template-columns:1fr 1.2fr;align-items:start}
+  .backdrop{align-items:center;padding:24px}
+  .sheet,.drawer{max-width:720px;border-radius:22px;max-height:90vh}
+  .sheet{display:grid;grid-template-columns:1fr 1.15fr;max-width:980px;overflow:hidden}
+  .sheet-media{padding:30px;align-content:center}
+  .sheet-body{overflow:auto;max-height:90vh;padding:28px 26px 0}
+  .actions{margin:0 -26px;padding:14px 26px 18px}
+  .grabber{display:none}
+  .cta-band .wrap{grid-template-columns:1.4fr auto;align-items:center}
+  footer .wrap{grid-template-columns:1.4fr 1fr 1fr}
+  .legal{grid-column:1/-1}
+  .dock{display:none}
+  footer{padding-bottom:40px}
+  .fab{display:inline-flex;position:fixed;right:22px;bottom:22px;z-index:45;width:62px;height:62px;border-radius:50%;padding:0}
+  .fab svg{width:30px;height:30px}
+  .toast{bottom:30px}
+  .list-btn .lbl{display:inline}
+}
+/* ---------- Bureau ---------- */
+@media (min-width:1040px){
+  .nav{display:flex}
+  .top .btn-wa{display:inline-flex}
+  .top .wrap{gap:22px}
+  .logo{margin-right:20px}
+  .nav{margin-right:auto}
+  .hero .wrap{grid-template-columns:1.02fr 1fr;align-items:center;gap:48px;padding-top:56px;padding-bottom:64px}
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .brand-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .why-grid{grid-template-columns:repeat(4,1fr)}
+  .sec{padding:84px 0}
+  .sec-head{grid-template-columns:1fr 1fr;align-items:end;gap:30px}
+  .filters{top:64px}
+  .chips{flex-wrap:wrap;overflow:visible;margin:0;padding:12px 0 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== SPRITES (logo + icônes) ====== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.4-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  </defs>
+</svg>
+
+<!-- ====== EN-TÊTE ====== -->
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#accueil" aria-label="KAROSS, retour à l'accueil">
+      <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#FFC21A"/>
+        <path d="M18 14v36" stroke="#111" stroke-width="7" stroke-linecap="square"/>
+        <path d="M18 34 37 15h10" stroke="#111" stroke-width="7" fill="none" stroke-linejoin="round"/>
+        <path d="M25 28l19 22" stroke="#111" stroke-width="7" fill="none"/>
+        <path d="M43 9l7 6-7 6" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="logo-word"><b>KAROSS</b><small>CHINE → GABON</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#marques">Marques</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#processus">Comment ça marche</a>
+      <a href="#bureaux">Nos bureaux</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <button class="list-btn js-open-list" type="button" aria-label="Ouvrir ma liste de devis">
+      <svg><use href="#i-list"/></svg><span class="lbl">Ma liste</span><span class="badge js-count">0</span>
+    </button>
+    <a class="btn btn-wa js-wa-general" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+  </div>
+</header>
+
+<main id="accueil">
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><i></i>Bureaux en Chine et au Gabon</span>
+      <h1>Votre carrosserie,<br>direct <em>usine</em>.<br>Livrée au Gabon.</h1>
+      <p class="hero-lead">Capots, ailes, portières, hayons, caisses complètes : des pièces en acier aux dimensions d'origine. Choisissez votre pièce, envoyez la demande sur WhatsApp : nous vérifions chez le fabricant en Chine et vous répondons avec un prix clair.</p>
+
+      <div class="finder" role="search" aria-label="Trouver une pièce pour mon véhicule">
+        <p class="finder-title">Trouver une pièce pour mon véhicule</p>
+        <div class="finder-row">
+          <div class="field-dark"><label class="sr" for="hf-brand">Marque</label><select id="hf-brand"></select></div>
+          <div class="field-dark"><label class="sr" for="hf-model">Modèle</label><select id="hf-model"></select></div>
+        </div>
+        <button class="btn btn-signal btn-block" id="hf-go" type="button">Voir les pièces disponibles</button>
+      </div>
+
+      <div class="hero-stats">
+        <div><b class="js-stat-refs">0</b><span>références au catalogue</span></div>
+        <div><b class="js-stat-brands">0</b><span>marques couvertes</span></div>
+        <div><b>2</b><span>bureaux : Chine et Gabon</span></div>
+      </div>
+    </div>
+
+    <div class="diagram" aria-label="Schéma du véhicule : touchez une zone pour voir les pièces">
+      <div class="diagram-head"><span>Fig. 1 · Vue de face</span><span>Touchez une zone</span></div>
+      <svg class="car" viewBox="0 0 520 360" role="img" aria-labelledby="car-t">
+        <title id="car-t">Schéma d'un SUV vu de face avec les zones de carrosserie</title>
+        <!-- toit et pare-brise -->
+        <path class="ln draw" d="M160 40 Q260 26 360 40 L392 128 L128 128 Z"/>
+        <path class="part" d="M160 40 Q260 26 360 40 L364 50 Q260 36 156 50 Z"/>
+        <path class="part" d="M128 128 L142 60 L150 60 L140 128 Z"/>
+        <path class="part" d="M392 128 L378 60 L370 60 L380 128 Z"/>
+        <path class="glass" d="M168 52 Q260 40 352 52 L378 120 L142 120 Z"/>
+        <path class="ln-soft" d="M168 52 Q260 40 352 52 L378 120 L142 120 Z"/>
+        <!-- carrosserie -->
+        <path class="ln draw" d="M128 128 Q78 132 68 160 L54 214 L50 258 L470 258 L466 214 L452 160 Q442 132 392 128"/>
+        <!-- capot -->
+        <path class="part" d="M128 128 L392 128 Q430 134 440 160 L80 160 Q90 134 128 128 Z"/>
+        <path class="ln-soft" d="M200 132 L190 158 M320 132 L330 158"/>
+        <!-- ailes -->
+        <path class="part" d="M68 160 L80 160 L72 214 L54 214 Z"/>
+        <path class="part" d="M452 160 L440 160 L448 214 L466 214 Z"/>
+        <!-- phares -->
+        <path class="ln-soft" d="M84 168 L176 172 L170 202 L90 200 Q78 198 80 186 Z"/>
+        <path class="ln-soft" d="M436 168 L344 172 L350 202 L430 200 Q442 198 440 186 Z"/>
+        <path class="ln-soft" d="M92 178 L168 181 M428 178 L352 181"/>
+        <circle class="ln-soft" cx="118" cy="189" r="8"/><circle class="ln-soft" cx="402" cy="189" r="8"/>
+        <!-- calandre -->
+        <path class="part" d="M186 166 L334 166 L326 226 L194 226 Z"/>
+        <path class="ln-soft" d="M192 180 H328 M194 194 H326 M196 208 H324"/>
+        <rect x="246" y="186" width="28" height="16" rx="8" class="ln-soft"/>
+        <!-- pare-chocs -->
+        <path class="part" d="M54 222 L466 222 L462 284 Q460 296 448 296 L72 296 Q60 296 58 284 Z"/>
+        <path class="ln-soft" d="M170 252 H350 L340 280 H180 Z"/>
+        <rect x="80" y="246" width="44" height="18" rx="9" class="ln-soft"/><rect x="396" y="246" width="44" height="18" rx="9" class="ln-soft"/>
+        <rect x="222" y="232" width="76" height="14" rx="3" class="ln-soft"/>
+        <!-- rétroviseurs -->
+        <path class="ln-soft" d="M118 118 L76 104 Q62 102 60 116 L62 132 Q64 140 76 138 L116 134 Z"/>
+        <path class="ln-soft" d="M402 118 L444 104 Q458 102 460 116 L458 132 Q456 140 444 138 L404 134 Z"/>
+        <!-- roues -->
+        <path class="ln draw" d="M74 296 V336 Q74 342 80 342 H128 Q134 342 134 336 V296 M386 296 V336 Q386 342 392 342 H440 Q446 342 446 336 V296"/>
+        <path class="ln-soft" d="M30 346 H490"/>
+
+        <!-- points interactifs -->
+        <g class="hot" tabindex="0" role="button" aria-label="1, Capots" data-cat="hood"><circle class="pulse" cx="260" cy="146" r="13"/><circle class="dot" cx="260" cy="146" r="14"/><text x="260" y="146">1</text></g>
+        <g class="hot" tabindex="0" role="button" aria-label="2, Faces avant" data-cat="front"><circle class="pulse" cx="300" cy="200" r="13"/><circle class="dot" cx="300" cy="200" r="14"/><text x="300" y="200">2</text></g>
+        <g class="hot" tabindex="0" role="button" aria-label="3, Ailes" data-cat="fender"><circle class="pulse" cx="456" cy="190" r="13"/><circle class="dot" cx="456" cy="190" r="14"/><text x="456" y="190">3</text></g>
+        <g class="hot" tabindex="0" role="button" aria-label="4, Pare-chocs" data-cat="bumper"><circle class="pulse" cx="260" cy="268" r="13"/><circle class="dot" cx="260" cy="268" r="14"/><text x="260" y="268">4</text></g>
+        <g class="hot" tabindex="0" role="button" aria-label="5, Toits" data-cat="roof"><circle class="pulse" cx="260" cy="36" r="13"/><circle class="dot" cx="260" cy="36" r="14"/><text x="260" y="36">5</text></g>
+        <g class="hot" tabindex="0" role="button" aria-label="6, Portières" data-cat="door"><circle class="pulse" cx="135" cy="96" r="13"/><circle class="dot" cx="135" cy="96" r="14"/><text x="135" y="96">6</text></g>
+      </svg>
+      <div class="legend">
+        <button type="button" data-cat="hood"><span class="n">1</span>Capots</button>
+        <button type="button" data-cat="front"><span class="n">2</span>Faces avant</button>
+        <button type="button" data-cat="fender"><span class="n">3</span>Ailes</button>
+        <button type="button" data-cat="bumper"><span class="n">4</span>Pare-chocs</button>
+        <button type="button" data-cat="roof"><span class="n">5</span>Toits</button>
+        <button type="button" data-cat="door"><span class="n">6</span>Portières</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg><div><b>Prix usine</b><span>Achat direct auprès des fabricants</span></div></div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg><div><b>Dimensions d'origine</b><span>Tôle acier, montage sans modification</span></div></div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 16l8-3 2-8 2 1-1 6 7-2 2 2-8 4-4 4H8l1-3-5 1z"/></svg><div><b>Aérien ou maritime</b><span>Selon votre urgence et votre budget</span></div></div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><div><b>Livraison à domicile</b><span>Dédouanement inclus, partout au Gabon</span></div></div>
+  </div>
+</div>
+
+<!-- ====== MARQUES ====== -->
+<section class="sec brands" id="marques">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i></i>Toutes les marques</span>
+        <h2 style="margin-top:12px">Quelle est votre voiture ?</h2>
+      </div>
+      <p>Touchez la marque de votre véhicule pour voir toutes les pièces disponibles.</p>
+    </div>
+    <div class="brand-grid" id="brand-grid"></div>
+    <div class="more-wrap"><button class="btn btn-ghost" type="button" id="brands-more" hidden>Voir toutes les marques</button></div>
+  </div>
+</section>
+
+<!-- ====== CATALOGUE ====== -->
+<section class="sec" id="catalogue" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i></i>Catalogue</span>
+        <h2 style="margin-top:12px">Choisissez votre pièce</h2>
+      </div>
+      <p>Touchez une pièce pour préciser votre véhicule et l'année, puis envoyez la demande. Vous recevez le prix directement sur WhatsApp.</p>
+    </div>
+
+    <div class="filters">
+      <div class="filter-row">
+        <div class="search"><svg><use href="#i-search"/></svg><label class="sr" for="q">Rechercher une pièce</label><input id="q" type="search" placeholder="Ex. : capot Hilux, portière Land Cruiser…" autocomplete="off"></div>
+        <div class="selects">
+          <div class="field-light"><label class="sr" for="f-brand">Marque</label><select id="f-brand"></select></div>
+          <div class="field-light"><label class="sr" for="f-model">Modèle</label><select id="f-model"></select></div>
+        </div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Type de pièce"></div>
+    </div>
+
+    <div class="result-bar"><span id="result-count"></span><button class="linkbtn" id="reset" type="button" hidden>Tout afficher</button></div>
+    <div class="grid" id="grid"></div>
+    <div class="more-wrap"><button class="btn btn-ghost" type="button" id="more" hidden>Afficher plus de pièces</button></div>
+
+    <!-- Demande sur mesure -->
+    <div class="custom" id="sur-mesure">
+      <div>
+        <span class="eyebrow"><i></i>Demande sur mesure</span>
+        <h3 style="margin-top:12px">Votre pièce n'est <em>pas</em> dans la liste ?</h3>
+        <p>Nous la trouvons pour vous. Indiquez votre véhicule et la pièce : la demande part sur WhatsApp, où vous pourrez aussi envoyer une photo de l'ancienne pièce.</p>
+      </div>
+      <form id="custom-form" novalidate>
+        <div class="two">
+          <div><label class="sr" for="c-brand">Marque</label><input class="inp-dark" id="c-brand" placeholder="Marque (ex. Toyota)" required></div>
+          <div><label class="sr" for="c-model">Modèle</label><input class="inp-dark" id="c-model" placeholder="Modèle (ex. Prado)" required></div>
+        </div>
+        <div class="two">
+          <div><label class="sr" for="c-year">Année</label><input class="inp-dark" id="c-year" inputmode="numeric" placeholder="Année (ex. 2019)"></div>
+          <div><label class="sr" for="c-city">Ville</label><input class="inp-dark" id="c-city" placeholder="Votre ville"></div>
+        </div>
+        <div><label class="sr" for="c-part">Pièce recherchée</label><input class="inp-dark" id="c-part" placeholder="Pièce recherchée (ex. pare-chocs avant)" required></div>
+        <div><label class="sr" for="c-note">Détails</label><textarea class="inp-dark" id="c-note" placeholder="Détails : côté, couleur, n° de châssis (VIN)…"></textarea></div>
+        <button class="btn btn-wa btn-block" type="submit"><svg><use href="#i-wa"/></svg>Envoyer la demande sur WhatsApp</button>
+        <p class="hint" id="c-hint">Marque, modèle et pièce suffisent pour commencer.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROCESSUS ====== -->
+<section class="sec" id="processus" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i></i>Comment ça marche</span>
+        <h2 style="margin-top:12px">Du clic à votre garage</h2>
+      </div>
+      <p>Pas de compte à créer, pas de paiement en ligne. Tout se règle avec un vrai interlocuteur, sur WhatsApp.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="num">01</span><h3>Choisissez</h3><p>Sélectionnez la pièce, votre véhicule et l'année exacte.</p></div>
+      <div class="step"><span class="num">02</span><h3>Envoyez</h3><p>Le message part sur WhatsApp avec la référence exacte de la pièce.</p></div>
+      <div class="step"><span class="num">03</span><h3>Recevez le prix</h3><p>Nous vérifions disponibilité et compatibilité à l'usine, puis vous envoyons le prix livré.</p></div>
+      <div class="step"><span class="num">04</span><h3>Recevez la pièce</h3><p>Expédition, dédouanement et livraison jusqu'à chez vous ou votre garage.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== POURQUOI ====== -->
+<section class="sec why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i></i>Pourquoi KAROSS</span>
+        <h2 style="margin-top:12px">Une équipe des deux côtés</h2>
+      </div>
+      <p>En Chine, nous sélectionnons les usines et contrôlons les pièces. Au Gabon, nous gérons la douane et la livraison. Vous n'avez qu'un seul contact.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 16.5 6.5 19.5l1-6.3L3 8.9 9 8z"/></svg><h3>La bonne pièce, du premier coup</h3><p>Nous vérifions la compatibilité avec votre modèle et votre année avant de commander.</p></div>
+      <div class="why-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>Réponse rapide</h3><p>Votre demande arrive avec toutes les infos utiles : on peut chiffrer sans aller-retour inutile.</p></div>
+      <div class="why-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v12H4zM8 7V5h8v2M4 12h16"/></svg><h3>De la pièce seule à la caisse complète</h3><p>Une aile, un capot, une portière, ou la caisse entière pour restaurer votre 4x4.</p></div>
+      <div class="why-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><h3>Prix clair, sans surprise</h3><p>Le prix annoncé comprend le transport et le dédouanement jusqu'au Gabon.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== BUREAUX ====== -->
+<section class="sec" id="bureaux">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i></i>Nos bureaux</span>
+        <h2 style="margin-top:12px">Deux pays, une seule équipe</h2>
+      </div>
+      <p>Votre pièce est suivie du départ de l'usine jusqu'à la remise en main propre.</p>
+    </div>
+    <div class="offices">
+      <div class="office">
+        <div class="flagbar"><i style="background:#DE2910"></i><i style="background:#FFDE00"></i></div>
+        <h3>Bureau Chine</h3>
+        <p class="city js-office-cn">Sourcing et contrôle qualité</p>
+        <ul>
+          <li>Sélection des usines et négociation des prix</li>
+          <li>Contrôle des pièces avant expédition</li>
+          <li>Emballage renforcé et groupage</li>
+        </ul>
+      </div>
+      <div class="route" aria-hidden="true"><span>Aérien</span><span class="dash"></span><span>Maritime</span></div>
+      <div class="office">
+        <div class="flagbar"><i style="background:#009E60"></i><i style="background:#FCD116"></i><i style="background:#3A75C4"></i></div>
+        <h3>Bureau Gabon</h3>
+        <p class="city js-office-ga">Akanda · Libreville</p>
+        <ul>
+          <li>Accueil, conseil et devis</li>
+          <li>Dédouanement de vos pièces</li>
+          <li>Livraison à domicile ou au garage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i></i>Questions fréquentes</span>
+        <h2 style="margin-top:12px">Avant de commander</h2>
+      </div>
+    </div>
+    <div class="faq">
+      <details><summary>Pourquoi les prix ne sont pas affichés ?</summary><p>Les prix usine et le fret changent souvent. Pour vous donner un prix juste et à jour, nous vérifions chaque demande auprès du fabricant. Vous recevez un prix livré au Gabon, transport et dédouanement compris.</p></details>
+      <details><summary>Comment être sûr que la pièce ira sur mon véhicule ?</summary><p>Indiquez la marque, le modèle et l'année exacte. Le plus sûr est d'ajouter le numéro de châssis (VIN), visible sur la carte grise. Nous confirmons la compatibilité avant toute commande.</p></details>
+      <details><summary>Quels sont les délais de livraison ?</summary><p>Ils dépendent du mode d'expédition. L'aérien est le plus rapide, le maritime le plus économique, idéal pour les pièces volumineuses comme les capots, les portières ou les caisses complètes. Le délai exact est indiqué avec le prix.</p></details>
+      <details><summary>Les pièces sont-elles livrées peintes ?</summary><p>Les pièces en tôle arrivent en apprêt anticorrosion, prêtes à être peintes à la couleur exacte de votre véhicule par votre carrossier. Les caisses complètes peuvent être livrées peintes : choisissez l'option dans la fiche.</p></details>
+      <details><summary>Je peux commander plusieurs pièces en une fois ?</summary><p>Oui. Ajoutez chaque pièce à votre liste de devis, puis envoyez toute la liste en un seul message WhatsApp.</p></details>
+      <details><summary>Livrez-vous ailleurs qu'au Gabon ?</summary><p>Oui, nous étudions les envois vers les autres pays d'Afrique. Indiquez votre ville et votre pays dans la demande.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA FINAL ====== -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Une photo de la pièce suffit.</h2>
+      <p style="margin-top:12px">Envoyez-nous la photo de la pièce abîmée et la carte grise : on s'occupe du reste.</p>
+    </div>
+    <a class="btn btn-dark js-wa-general" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Écrire sur WhatsApp</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#accueil" aria-label="KAROSS">
+        <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#FFC21A"/><path d="M18 14v36" stroke="#111" stroke-width="7"/><path d="M18 34 37 15h10" stroke="#111" stroke-width="7" fill="none" stroke-linejoin="round"/><path d="M25 28l19 22" stroke="#111" stroke-width="7" fill="none"/><path d="M43 9l7 6-7 6" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="logo-word"><b>KAROSS</b><small>CHINE → GABON</small></span>
+      </a>
+      <p style="margin:14px 0 0;max-width:30em">Importation de pièces de carrosserie automobile, directement des usines chinoises jusqu'au Gabon.</p>
+    </div>
+    <div>
+      <h4>Catalogue</h4>
+      <ul id="footer-cats"></ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>WhatsApp : <span class="js-phone"></span></li>
+        <li class="js-email-row">E-mail : <span class="js-email"></span></li>
+        <li class="js-office-ga2">Akanda, Libreville, Gabon</li>
+      </ul>
+    </div>
+    <p class="legal">© <span id="yr"></span> KAROSS. Les marques et modèles de véhicules cités servent uniquement à indiquer la compatibilité des pièces.</p>
+  </div>
+</footer>
+
+<!-- Barre mobile -->
+<div class="dock">
+  <button class="list-btn js-open-list" type="button" aria-label="Ouvrir ma liste de devis"><svg><use href="#i-list"/></svg><span class="badge js-count">0</span></button>
+  <a class="btn btn-wa js-wa-general" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Demander un prix</a>
+</div>
+<a class="btn btn-wa fab js-wa-general" href="#" target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><svg><use href="#i-wa"/></svg></a>
+
+<!-- Fiche produit -->
+<div class="backdrop" id="sheet-bd" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" id="sheet">
+    <div class="sheet-media" id="sheet-media"><span class="grabber"></span></div>
+    <div class="sheet-body">
+      <button class="close" type="button" id="sheet-close" aria-label="Fermer la fiche"><svg><use href="#i-x"/></svg></button>
+      <div>
+        <span class="ref" id="sheet-ref"></span>
+        <h2 class="sheet-title" id="sheet-title"></h2>
+        <p class="sheet-desc" id="sheet-desc"></p>
+      </div>
+      <form class="form" id="sheet-form" novalidate></form>
+      <div class="preview">
+        <div class="preview-head"><span>Message envoyé sur WhatsApp</span><button class="linkbtn" type="button" id="copy-msg" style="color:#0E6B35;font-size:12.5px">Copier</button></div>
+        <pre id="msg-preview"></pre>
+      </div>
+      <div class="actions">
+        <a class="btn btn-wa btn-block" id="sheet-wa" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Demander le prix sur WhatsApp</a>
+        <button class="btn btn-line btn-block" type="button" id="sheet-add"><svg><use href="#i-plus"/></svg>Ajouter à ma liste et continuer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Liste de devis -->
+<div class="backdrop" id="list-bd" aria-hidden="true">
+  <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="list-title">
+    <div class="drawer-head"><h2 id="list-title">Ma liste de devis</h2><button class="close" type="button" id="list-close" aria-label="Fermer la liste"><svg><use href="#i-x"/></svg></button></div>
+    <div class="drawer-body" id="list-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><i></i><span></span></div>
+
+<script>
+/* =====================================================================
+   CONFIGURATION : modifiez ces lignes pour mettre vos coordonnées
+   ===================================================================== */
+const CONFIG = {
+  marque: "KAROSS",
+  whatsapp: "24177363526",          // Votre numéro WhatsApp, format international sans + ni espaces (ex. 24177123456)
+  telephoneAffiche: "+241 77 36 35 26",
+  email: "",                        // Laisser vide pour masquer la ligne e-mail
+  bureauGabon: "Akanda · Libreville",
+  bureauChine: "Sourcing et contrôle qualité"
+};
+
+/* Types de pièces (l'ordre = ordre des filtres) */
+const CATS = [
+  {id:"shell",       label:"Caisses et lots"},
+  {id:"hood",        label:"Capots"},
+  {id:"fender",      label:"Ailes"},
+  {id:"door",        label:"Portières"},
+  {id:"tailgate",    label:"Hayons et coffres"},
+  {id:"front",       label:"Faces avant"},
+  {id:"bumper",      label:"Pare-chocs"},
+  {id:"roof",        label:"Toits"},
+  {id:"structure",   label:"Structure et plancher"},
+  {id:"accessories", label:"Accessoires"}
+];
+/* Le catalogue complet est dans le fichier catalogue.json (une ligne par pièce). */
+let PRODUCTS = [];
+
+const VILLES = ["Libreville","Akanda","Owendo","Ntoum","Port-Gentil","Franceville","Moanda","Oyem","Lambaréné","Mouila","Tchibanga","Makokou","Koulamoutou","Bitam","Autre ville ou pays"];
+
+/* =====================================================================
+   DESSINS TECHNIQUES (un par type de pièce)
+   ===================================================================== */
+const S = 'fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"';
+const T = 'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".55"';
+const F = 'fill="currentColor" opacity=".08"';
+const ICONS = {
+  "bodykit":`<path ${F} d="M12 92V68q2-6 18-8l32-4 20-24q4-4 12-4h86q8 0 12 6l16 22 14 4q6 2 6 10v22h-20a24 24 0 0 0-46 0H82a24 24 0 0 0-46 0Z"/><path ${S} d="M12 92V68q2-6 18-8l32-4 20-24q4-4 12-4h86q8 0 12 6l16 22 14 4q6 2 6 10v22h-20a24 24 0 0 0-46 0H82a24 24 0 0 0-46 0Z"/><circle ${S} cx="59" cy="96" r="17"/><circle ${S} cx="185" cy="96" r="17"/><circle ${T} cx="59" cy="96" r="7"/><circle ${T} cx="185" cy="96" r="7"/><path ${T} d="M90 34h40v22H72ZM136 34h42l18 22h-60ZM12 76h22M210 70h18M100 64v24"/>`,
+  "bumper-f":`<path ${F} d="M18 46q102-22 204 0l-6 50q-2 10-12 10H36q-10 0-12-10Z"/><path ${S} d="M18 46q102-22 204 0l-6 50q-2 10-12 10H36q-10 0-12-10Z"/><path ${T} d="M74 72h92l-8 22H82Z M84 79h72 M88 86h64"/><rect ${S} x="34" y="66" width="28" height="14" rx="7"/><rect ${S} x="178" y="66" width="28" height="14" rx="7"/><rect ${T} x="98" y="52" width="44" height="12" rx="2"/>`,
+  "bumper-r":`<path ${F} d="M20 40q100-12 200 0l-4 48q-2 12-14 12H38q-12 0-14-12Z"/><path ${S} d="M20 40q100-12 200 0l-4 48q-2 12-14 12H38q-12 0-14-12Z"/><path ${S} d="M30 58h26M184 58h26"/><path ${T} d="M60 86h120M70 92l10-6M90 92l10-6M140 92l10-6M160 92l10-6"/><rect ${T} x="94" y="50" width="52" height="20" rx="3"/><path ${S} d="M190 100v6h18v-6"/>`,
+  "grille":`<path ${F} d="M40 24h160q10 0 8 10l-14 72q-2 8-10 8H56q-8 0-10-8L32 34q-2-10 8-10Z"/><path ${S} d="M40 24h160q10 0 8 10l-14 72q-2 8-10 8H56q-8 0-10-8L32 34q-2-10 8-10Z"/><path ${S} d="M40 44h160M43 62h154M46 80h148M49 98h142"/><rect fill="#0E1216" stroke="currentColor" stroke-width="3" x="100" y="54" width="40" height="24" rx="12"/><path ${T} d="M112 66h16"/>`,
+  "headlight":`<path ${F} d="M18 44 196 30q24-2 22 20l-12 40q-4 14-18 14L42 102q-24-2-24-24Z"/><path ${S} d="M18 44 196 30q24-2 22 20l-12 40q-4 14-18 14L42 102q-24-2-24-24Z"/><path ${S} d="M30 52l170-12"/><circle ${S} cx="82" cy="76" r="16"/><circle ${S} cx="136" cy="72" r="16"/><circle ${T} cx="82" cy="76" r="6"/><circle ${T} cx="136" cy="72" r="6"/><path ${T} d="M166 86h30M170 78h28"/>`,
+  "taillight":`<path ${F} d="M60 18l116 10q16 2 14 18l-18 62q-4 10-14 10l-90-8q-14-2-14-16l-8-60q-2-16 14-16Z"/><path ${S} d="M60 18l116 10q16 2 14 18l-18 62q-4 10-14 10l-90-8q-14-2-14-16l-8-60q-2-16 14-16Z"/><path ${S} d="M64 38l112 10M66 56l104 9"/><path ${T} d="M72 78l90 8M74 92l82 7"/>`,
+  "hood":`<path ${F} d="M56 16h128q10 0 14 10l26 92H16l26-92q4-10 14-10Z"/><path ${S} d="M56 16h128q10 0 14 10l26 92H16l26-92q4-10 14-10Z"/><path ${T} d="M120 18v98M92 30h56l8 70H84Z"/><rect ${S} x="102" y="40" width="36" height="12" rx="3"/>`,
+  "fender":`<path ${F} d="M18 112V62q8-34 60-38h132l12 38v50h-34a52 52 0 0 0-104 0Z"/><path ${S} d="M18 112V62q8-34 60-38h132l12 38v50h-34a52 52 0 0 0-104 0Z"/><path ${T} d="M30 60h180M84 112a36 36 0 0 1 72 0"/><rect ${S} x="176" y="74" width="22" height="9" rx="4"/>`,
+  "mirror":`<path ${F} d="M58 26q110-26 148 22 12 40-42 52l-96-2q-34-4-30-36 4-28 20-36Z"/><path ${S} d="M58 26q110-26 148 22 12 40-42 52l-96-2q-34-4-30-36 4-28 20-36Z"/><path ${T} d="M66 40q90-18 124 16 6 26-32 32l-84-2q-20-4-18-22 2-18 10-24Z"/><path ${S} d="M64 96 34 122h40l10-24"/><path ${S} d="M150 34l46 12"/>`,
+  "step":`<rect ${F} x="14" y="54" width="212" height="24" rx="8"/><rect ${S} x="14" y="54" width="212" height="24" rx="8"/><path ${T} d="M34 62h172M34 70h172"/><path ${S} d="M48 78v24h16M120 78v24h16M190 78v24h16"/>`,
+  "spoiler":`<path ${F} d="M18 66q102-30 204 0l-8 20q-96-22-188 0Z"/><path ${S} d="M18 66q102-30 204 0l-8 20q-96-22-188 0Z"/><rect ${S} x="100" y="54" width="40" height="8" rx="3"/><path ${S} d="M70 80v26M170 80v26"/><path ${T} d="M30 104h180"/>`,
+  "bullbar":`<path ${S} d="M30 112V54q0-26 26-26h128q26 0 26 26v58"/><path ${S} d="M74 28v76M166 28v76M30 98h180M74 66h92"/><path ${T} d="M50 40v58M190 40v58"/><circle ${S} cx="52" cy="118" r="0"/><rect ${S} x="96" y="40" width="20" height="18" rx="9"/><rect ${S} x="124" y="40" width="20" height="18" rx="9"/><path ${T} d="M86 112h68l-8 10H94Z"/>`
+};
+const ICON_ALIAS = {accessories:"bumper-f",shell:"bodykit",door:"fender",tailgate:"bumper-r",front:"grille",bumper:"bumper-f",roof:"hood",structure:"grille"};
+const ph = n => { const s = Math.floor((n-1)/12) + 1, k = (n-1) % 12; return `background-image:url(s/${s}.jpg);background-position:${(k%2)*100}% ${Math.floor(k/2)*20}%`; };
+const photoEl = (n, label, cls) => `<div class="ph${cls ? " " + cls : ""}" style="${ph(n)}" role="img" aria-label="${esc(label)}"></div>`;
+const icon = c => `<svg viewBox="0 0 240 130" aria-hidden="true">${ICONS[c]||ICONS[ICON_ALIAS[c]]||ICONS.bodykit}</svg>`;
+
+/* =====================================================================
+   OUTILS
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const catLabel = id => (CATS.find(c => c.id === id) || {}).label || "";
+const years = v => !v[2] ? "" : !v[3] ? `${v[2]} et +` : v[2] === v[3] ? `${v[2]}` : `${v[2]}–${v[3]}`;
+const vehLabel = v => v[1] === "Autres modèles" || v[1] === "Modèle à préciser" ? v[0] : `${v[0]} ${v[1]}`;
+const fitText = p => p.veh.map(v => [vehLabel(v), years(v)].filter(Boolean).join(" · ")).join(" / ");
+const waLink = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+function toast(msg){
+  const t = $("#toast"); t.querySelector("span").textContent = msg; t.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2200);
+}
+function copyText(text){
+  const done = () => toast("Message copié");
+  try{
+    navigator.clipboard.writeText(text).then(done).catch(() => fallback());
+  }catch(e){ fallback(); }
+  function fallback(){
+    const ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){ toast("Sélectionnez le texte pour le copier"); }
+    ta.remove();
+  }
+}
+
+/* =====================================================================
+   COORDONNÉES
+   ===================================================================== */
+const GENERAL_MSG = `Bonjour ${CONFIG.marque}, je cherche une pièce de carrosserie pour mon véhicule.`;
+$$(".js-wa-general").forEach(a => a.href = waLink(GENERAL_MSG));
+$(".js-phone").textContent = CONFIG.telephoneAffiche;
+if(CONFIG.email){ $(".js-email").textContent = CONFIG.email; } else { $(".js-email-row").remove(); }
+$(".js-office-ga").textContent = CONFIG.bureauGabon;
+$(".js-office-cn").textContent = CONFIG.bureauChine;
+$("#yr").textContent = new Date().getFullYear();
+
+/* =====================================================================
+   FILTRES & CATALOGUE
+   ===================================================================== */
+const PAGE = 24;
+const state = {cat:"", brand:"", model:"", q:"", limit:PAGE};
+let BRANDS = [], BRAND_N = {};
+const MODEL_LAST = ["Autres modèles","Modèle à préciser"];
+function modelsOf(b){
+  const n = {};
+  PRODUCTS.forEach(p => p.veh.forEach(v => { if(!b || v[0] === b) n[v[1]] = (n[v[1]]||0) + 1; }));
+  return Object.keys(n).sort((x,y) => (MODEL_LAST.includes(x)) - (MODEL_LAST.includes(y)) || x.localeCompare(y,"fr",{numeric:true})).map(m => [m, n[m]]);
+}
+function fillBrand(sel, first){ sel.innerHTML = `<option value="">${first}</option>` + BRANDS.map(b => `<option value="${esc(b)}">${esc(b)} (${BRAND_N[b]})</option>`).join(""); }
+function fillModel(sel, brand){ sel.innerHTML = `<option value="">${brand ? "Tous les modèles" : "Modèle"}</option>` + (brand ? modelsOf(brand).map(([m,n]) => `<option value="${esc(m)}">${esc(m)} (${n})</option>`).join("") : ""); sel.disabled = !brand; }
+let brandsOpen = false;
+function renderBrands(){
+  const list = brandsOpen ? BRANDS : BRANDS.slice(0, 12);
+  $("#brands-more").hidden = BRANDS.length <= 12;
+  $("#brands-more").textContent = brandsOpen ? "Afficher moins de marques" : `Voir les ${BRANDS.length} marques`;
+  $("#brand-grid").innerHTML = list.map(b => `<button class="brand-tile" type="button" data-brand="${esc(b)}"><b>${esc(b)}</b><span>${BRAND_N[b]} pièce${BRAND_N[b]>1?"s":""}</span></button>`).join("");
+}
+function initCatalog(data){
+  const cats = CATS.map(c => c.id);
+  PRODUCTS = data.i.map(r => ({ref:r[0], code:r[1], cat:cats[r[2]], veh:[[data.b[r[3]], r[4], r[5], r[6]]], title:r[7], desc:r[8], side:!!r[9], opts:data.o[r[10]], photo:r[11] || 0}));
+  PRODUCTS = PRODUCTS.filter(p => p.photo).concat(PRODUCTS.filter(p => !p.photo));
+  BRAND_N = {}; PRODUCTS.forEach(p => { const b = p.veh[0][0]; BRAND_N[b] = (BRAND_N[b]||0) + 1; });
+  BRANDS = Object.keys(BRAND_N).sort((a,b) => (a === "Autres marques") - (b === "Autres marques") || BRAND_N[b] - BRAND_N[a] || a.localeCompare(b,"fr"));
+  $(".js-stat-refs").textContent = PRODUCTS.length.toLocaleString("fr-FR");
+  $(".js-stat-brands").textContent = BRANDS.filter(b => b !== "Autres marques").length;
+  fillBrand($("#f-brand"), "Toutes les marques"); fillModel($("#f-model"), "");
+  fillBrand($("#hf-brand"), "Marque"); fillModel($("#hf-model"), "");
+  renderBrands(); render();
+}
+
+$("#footer-cats").innerHTML = CATS.slice(0,6).map(c => `<li><a href="#catalogue" data-cat="${c.id}">${esc(c.label)}</a></li>`).join("");
+
+function norm(s){ return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); }
+function matches(p, ignoreCat){
+  if(!ignoreCat && state.cat && p.cat !== state.cat) return false;
+  if(state.brand && !p.veh.some(v => v[0] === state.brand)) return false;
+  if(state.model && !p.veh.some(v => v[1] === state.model)) return false;
+  if(state.q){
+    const hay = p._hay || (p._hay = norm([p.ref,p.title,p.desc,catLabel(p.cat),fitText(p)].join(" ")));
+    if(!norm(state.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w))) return false;
+  }
+  return true;
+}
+function renderChips(){
+  const base = PRODUCTS.filter(p => matches(p, true));
+  const all = `<button class="chip" type="button" data-cat="" aria-pressed="${!state.cat}">Toutes <span class="c">${base.length}</span></button>`;
+  $("#chips").innerHTML = all + CATS.map(c => {
+    const n = base.filter(p => p.cat === c.id).length;
+    if(!n && state.cat !== c.id) return "";
+    return `<button class="chip" type="button" data-cat="${c.id}" aria-pressed="${state.cat === c.id}">${esc(c.label)} <span class="c">${n}</span></button>`;
+  }).join("");
+}
+function renderGrid(){
+  const list = PRODUCTS.filter(p => matches(p));
+  const filtered = state.cat || state.brand || state.model || state.q;
+  $("#result-count").innerHTML = `<b>${list.length}</b> pièce${list.length > 1 ? "s" : ""}${state.model ? " pour " + esc(state.brand ? state.brand + " " : "") + esc(state.model) : state.brand ? " pour " + esc(state.brand) : ""}`;
+  $("#reset").hidden = !filtered;
+  if(!list.length){
+    $("#grid").innerHTML = `<div class="empty"><b>Aucune pièce affichée pour cette recherche.</b><p>Nous pouvons sûrement la trouver : envoyez-nous une demande sur mesure.</p><a class="btn btn-signal" href="#sur-mesure">Faire une demande sur mesure</a></div>`;
+    return;
+  }
+  const shown = list.slice(0, state.limit), rest = list.length - shown.length;
+  $("#more").hidden = rest <= 0;
+  $("#more").textContent = `Afficher plus de pièces (${rest.toLocaleString("fr-FR")} restantes)`;
+  $("#grid").innerHTML = shown.map(p => `
+    <article class="card">
+      <button class="card-hit" type="button" data-ref="${p.ref}" aria-label="${esc(p.title)}, ${esc(fitText(p))}. Demander le prix">
+        <div class="card-media${p.photo ? " has-photo" : ""}">${p.photo ? photoEl(p.photo, p.title) : icon(p.cat)}<span class="ref">${p.ref}</span>${p.tag ? `<span class="tag">${esc(p.tag)}</span>` : ""}</div>
+        <div class="card-body"><p class="card-cat">${esc(catLabel(p.cat))}</p><h3>${esc(p.title)}</h3><p class="card-fit">${esc(fitText(p))}</p></div>
+        <div class="card-foot"><span class="card-cta">Demander le prix →</span></div>
+      </button>
+    </article>`).join("");
+}
+function render(keep){ if(!keep) state.limit = PAGE; renderChips(); renderGrid(); }
+$("#more").addEventListener("click", () => { state.limit += PAGE * 2; render(true); });
+$("#grid").addEventListener("error", e => {
+  const im = e.target; if(im.tagName !== "IMG") return;
+  const box = im.closest(".card-media"); const p = PRODUCTS.find(x => x.ref === (im.closest(".card-hit")||{}).dataset?.ref);
+  if(box){ box.classList.remove("has-photo"); im.outerHTML = p ? icon(p.cat) : ""; }
+  if(p) p.photo = "";
+}, true);
+$("#brands-more").addEventListener("click", () => { brandsOpen = !brandsOpen; renderBrands(); });
+$("#brand-grid").addEventListener("click", e => {
+  const b = e.target.closest(".brand-tile"); if(!b) return;
+  state.brand = b.dataset.brand; state.model = ""; state.cat = "";
+  $("#f-brand").value = state.brand; fillModel($("#f-model"), state.brand); render(); goCatalog();
+});
+
+$("#chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if(!b) return; state.cat = b.dataset.cat; render(); });
+$("#f-brand").addEventListener("change", e => { state.brand = e.target.value; state.model = ""; fillModel($("#f-model"), state.brand); render(); });
+$("#f-model").addEventListener("change", e => { state.model = e.target.value; render(); });
+let qT; $("#q").addEventListener("input", e => { clearTimeout(qT); qT = setTimeout(() => { state.q = e.target.value.trim(); render(); }, 120); });
+$("#reset").addEventListener("click", () => {
+  Object.assign(state,{cat:"",brand:"",model:"",q:""});
+  $("#q").value = ""; $("#f-brand").value = ""; fillModel($("#f-model"), ""); render();
+});
+function goCatalog(){ document.getElementById("catalogue").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"}); }
+function setCat(cat){ state.cat = cat; render(); goCatalog(); }
+
+/* Recherche du hero */
+$("#hf-brand").addEventListener("change", e => fillModel($("#hf-model"), e.target.value));
+$("#hf-go").addEventListener("click", () => {
+  state.brand = $("#hf-brand").value; state.model = $("#hf-model").value; state.cat = "";
+  $("#f-brand").value = state.brand; fillModel($("#f-model"), state.brand); $("#f-model").value = state.model;
+  render(); goCatalog();
+});
+/* Schéma interactif + légende + liens pied de page */
+$$(".hot").forEach(h => {
+  h.addEventListener("click", () => setCat(h.dataset.cat));
+  h.addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); setCat(h.dataset.cat); } });
+});
+$$(".legend button").forEach(b => b.addEventListener("click", () => setCat(b.dataset.cat)));
+$("#footer-cats").addEventListener("click", e => { const a = e.target.closest("a[data-cat]"); if(a){ e.preventDefault(); setCat(a.dataset.cat); } });
+
+/* =====================================================================
+   FICHE PRODUIT + MESSAGE WHATSAPP
+   ===================================================================== */
+let current = null, lastFocus = null;
+const profile = store.get("kaross-profile", {nom:"", ville:"Libreville", villeAutre:""});
+
+function sheetForm(p){
+  const vehOpts = p.veh.map((v,i) => `<option value="${i}">${esc(v[0] + " " + v[1])} (${years(v)})</option>`).join("");
+  const sideHtml = p.side ? `
+    <div class="f"><span class="lab">Côté</span>
+      <div class="seg" role="radiogroup">
+        ${["Gauche (conducteur)","Droite (passager)","La paire"].map((s,i) => `<input type="radio" name="side" id="side${i}" value="${s}" ${i===2?"checked":""}><label for="side${i}">${s}</label>`).join("")}
+      </div></div>` : "";
+  const optHtml = p.opts && p.opts.length > 1 ? `
+    <div class="f"><span class="lab">Option / finition</span>
+      <div class="seg" role="radiogroup">
+        ${p.opts.map((o,i) => `<input type="radio" name="opt" id="opt${i}" value="${esc(o)}" ${i===0?"checked":""}><label for="opt${i}">${esc(o)}</label>`).join("")}
+      </div></div>` : "";
+  return `
+    <div class="f sel"><label for="s-veh">Véhicule</label><select id="s-veh">${vehOpts}</select></div>
+    <div class="f-two">
+      <div class="f sel" id="s-year-wrap"><label for="s-year">Année exacte</label><select id="s-year"></select></div>
+      <div class="f"><span class="lab">Quantité</span>
+        <div class="qty"><button type="button" data-q="-1" aria-label="Diminuer">−</button><input id="s-qty" type="number" inputmode="numeric" min="1" max="99" value="1" aria-label="Quantité"><button type="button" data-q="1" aria-label="Augmenter">+</button></div>
+      </div>
+    </div>
+    ${sideHtml}${optHtml}
+    <div class="f-two">
+      <div class="f"><label for="s-name">Votre nom</label><input id="s-name" autocomplete="name" placeholder="Nom et prénom" value="${esc(profile.nom)}"></div>
+      <div class="f sel"><label for="s-city">Ville</label><select id="s-city">${VILLES.map(v => `<option ${v===profile.ville?"selected":""}>${v}</option>`).join("")}</select></div>
+    </div>
+    <div class="f" id="s-city-other-wrap" ${profile.ville === "Autre ville ou pays" ? "" : "hidden"}><label for="s-city-other">Ville et pays</label><input id="s-city-other" placeholder="Ex. : Douala, Cameroun" value="${esc(profile.villeAutre)}"></div>
+    <div class="f"><label for="s-vin">N° de châssis (VIN) <span class="opt">facultatif, sur la carte grise</span></label><input id="s-vin" autocapitalize="characters" placeholder="Ex. : JTMHV05J804123456"></div>
+    <div class="f"><label for="s-note">Précisions <span class="opt">facultatif</span></label><textarea id="s-note" placeholder="Version, cabine simple ou double, conduite à gauche…"></textarea></div>`;
+}
+function fillYears(){
+  const v = current.veh[+$("#s-veh").value], w = $("#s-year-wrap");
+  if(!v[2]){
+    w.classList.remove("sel");
+    w.innerHTML = `<label for="s-year">Année exacte</label><input id="s-year" inputmode="numeric" maxlength="4" placeholder="Ex. : 2019">`;
+    return;
+  }
+  w.classList.add("sel");
+  const ys = []; for(let y = v[3] || new Date().getFullYear(); y >= v[2]; y--) ys.push(y);
+  w.innerHTML = `<label for="s-year">Année exacte</label><select id="s-year"><option value="">Choisir l'année</option>${ys.map(y => `<option>${y}</option>`).join("")}<option>Je ne sais pas</option></select>`;
+}
+function readSelection(){
+  const p = current, v = p.veh[+$("#s-veh").value];
+  const city = $("#s-city").value === "Autre ville ou pays" ? ($("#s-city-other").value.trim() || "Autre ville ou pays") : $("#s-city").value;
+  return {
+    ref:p.ref, cat:p.cat, title:p.title, code:p.code || "", photo:p.photo || "",
+    vehicule:`${v[0]} ${v[1]}`, annee:$("#s-year").value.trim() || "non précisée",
+    cote:p.side ? (document.querySelector('input[name="side"]:checked')||{}).value : "",
+    option:(p.opts && p.opts.length > 1) ? (document.querySelector('input[name="opt"]:checked')||{}).value : (p.opts ? p.opts[0] : ""),
+    qty:Math.max(1, Math.min(99, parseInt($("#s-qty").value,10) || 1)),
+    vin:$("#s-vin").value.trim().toUpperCase(), note:$("#s-note").value.trim(),
+    nom:$("#s-name").value.trim(), ville:city
+  };
+}
+function itemLines(it, n){
+  const L = [];
+  L.push(`${n ? n + ". " : ""}*${it.title}*`);
+  L.push(`Réf : ${it.ref}${it.code ? "  |  Code : " + it.code : ""}`);
+  L.push(`Véhicule : ${it.vehicule}, année ${it.annee}`);
+  if(it.cote) L.push(`Côté : ${it.cote}`);
+  if(it.option) L.push(`Option : ${it.option}`);
+  L.push(`Quantité : ${it.qty}`);
+  if(it.vin) L.push(`Châssis (VIN) : ${it.vin}`);
+  if(it.note) L.push(`Précisions : ${it.note}`);
+  return L.join("\n");
+}
+function clientLines(nom, ville){
+  const L = [];
+  if(nom) L.push(`Nom : ${nom}`);
+  if(ville) L.push(`Ville : ${ville}`);
+  return L.length ? "\n\n" + L.join("\n") : "";
+}
+function buildMessage(it){
+  return `Bonjour ${CONFIG.marque}, je souhaite le prix de cette pièce :\n\n${itemLines(it)}${clientLines(it.nom, it.ville)}\n\nMerci !`;
+}
+function updatePreview(){
+  const it = readSelection(), msg = buildMessage(it);
+  $("#msg-preview").textContent = msg;
+  $("#sheet-wa").href = waLink(msg);
+  profile.nom = it.nom; profile.ville = $("#s-city").value; profile.villeAutre = ($("#s-city-other")||{}).value || "";
+  store.set("kaross-profile", profile);
+}
+function openSheet(ref){
+  current = PRODUCTS.find(p => p.ref === ref); if(!current) return;
+  lastFocus = document.activeElement;
+  $("#sheet-media").classList.toggle("has-photo", !!current.photo);
+  $("#sheet-media").innerHTML = `<span class="grabber"></span>` + (current.photo ? photoEl(current.photo, current.title) : icon(current.cat));
+  $("#sheet-ref").textContent = `${current.ref} · ${catLabel(current.cat)}`;
+  $("#sheet-title").textContent = current.title;
+  $("#sheet-desc").textContent = current.desc;
+  $("#sheet-form").innerHTML = sheetForm(current);
+  fillYears(); updatePreview();
+  $("#sheet-bd").classList.add("open"); $("#sheet-bd").setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+  $(".sheet-body").scrollTop = 0; $("#sheet").scrollTop = 0;
+  setTimeout(() => $("#sheet-close").focus(), 60);
+}
+function closeBd(id){
+  const bd = $(id); if(!bd.classList.contains("open")) return;
+  bd.classList.remove("open"); bd.setAttribute("aria-hidden","true");
+  if(!$$(".backdrop.open").length) document.body.style.overflow = "";
+  if(lastFocus && lastFocus.focus) lastFocus.focus();
+}
+$("#grid").addEventListener("click", e => { const b = e.target.closest(".card-hit"); if(b) openSheet(b.dataset.ref); });
+$("#sheet-form").addEventListener("input", updatePreview);
+$("#sheet-form").addEventListener("change", e => {
+  if(e.target.id === "s-veh") fillYears();
+  if(e.target.id === "s-city") $("#s-city-other-wrap").hidden = e.target.value !== "Autre ville ou pays";
+  updatePreview();
+});
+$("#sheet-form").addEventListener("click", e => {
+  const b = e.target.closest("[data-q]"); if(!b) return;
+  const q = $("#s-qty"); q.value = Math.max(1, Math.min(99, (parseInt(q.value,10)||1) + (+b.dataset.q))); updatePreview();
+});
+$("#sheet-form").addEventListener("submit", e => e.preventDefault());
+$("#sheet-close").addEventListener("click", () => closeBd("#sheet-bd"));
+$("#copy-msg").addEventListener("click", () => copyText($("#msg-preview").textContent));
+$("#sheet-add").addEventListener("click", () => {
+  const it = readSelection(); delete it.nom; delete it.ville;
+  quote.push(it); saveQuote(); closeBd("#sheet-bd"); toast(`Ajouté à votre liste (${quote.length})`);
+});
+
+/* =====================================================================
+   LISTE DE DEVIS (plusieurs pièces en un message)
+   ===================================================================== */
+let quote = store.get("kaross-quote", []);
+function saveQuote(){ store.set("kaross-quote", quote); $$(".js-count").forEach(b => b.textContent = quote.length); }
+saveQuote();
+function quoteMessage(){
+  const nom = ($("#l-name")||{}).value?.trim() || profile.nom;
+  let ville = ($("#l-city")||{}).value || profile.ville;
+  if(ville === "Autre ville ou pays") ville = profile.villeAutre || ville;
+  return `Bonjour ${CONFIG.marque}, je souhaite un devis pour ${quote.length} pièce${quote.length>1?"s":""} :\n\n` +
+    quote.map((it,i) => itemLines(it, i+1)).join("\n\n") + clientLines(nom, ville) + `\n\nMerci !`;
+}
+function renderList(){
+  const body = $("#list-body");
+  if(!quote.length){
+    body.innerHTML = `<div class="empty"><b>Votre liste est vide.</b><p>Ouvrez une pièce du catalogue et touchez « Ajouter à ma liste ».</p><button class="btn btn-signal" type="button" id="l-browse">Parcourir le catalogue</button></div>`;
+    $("#l-browse").addEventListener("click", () => { closeBd("#list-bd"); goCatalog(); });
+    return;
+  }
+  body.innerHTML = quote.map((it,i) => `
+    <div class="li"><div class="li-ico${it.photo ? " has-photo" : ""}">${it.photo ? photoEl(it.photo, it.title) : icon(it.cat)}</div>
+      <div><b>${esc(it.title)}</b><span>${esc(it.ref)} · ${esc(it.vehicule)}, année ${esc(it.annee)}</span><span>${[it.cote, it.option, "Qté " + it.qty].filter(Boolean).map(esc).join(" · ")}</span></div>
+      <button class="rm" type="button" data-i="${i}" aria-label="Retirer ${esc(it.title)}"><svg><use href="#i-trash"/></svg></button>
+    </div>`).join("") + `
+    <div class="f-two form">
+      <div class="f"><label for="l-name">Votre nom</label><input id="l-name" autocomplete="name" placeholder="Nom et prénom" value="${esc(profile.nom)}"></div>
+      <div class="f sel"><label for="l-city">Ville</label><select id="l-city">${VILLES.map(v => `<option ${v===profile.ville?"selected":""}>${v}</option>`).join("")}</select></div>
+    </div>
+    <a class="btn btn-wa btn-block" id="l-send" href="#" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Envoyer toute la liste sur WhatsApp</a>
+    <div class="actions-row"><button class="btn btn-line" type="button" id="l-copy"><svg><use href="#i-copy"/></svg>Copier</button><button class="btn btn-line" type="button" id="l-clear">Vider la liste</button></div>`;
+  const sync = () => { profile.nom = $("#l-name").value.trim(); profile.ville = $("#l-city").value; store.set("kaross-profile", profile); $("#l-send").href = waLink(quoteMessage()); };
+  sync();
+  $("#l-name").addEventListener("input", sync); $("#l-city").addEventListener("change", sync);
+  $("#l-copy").addEventListener("click", () => copyText(quoteMessage()));
+  $("#l-clear").addEventListener("click", () => { quote = []; saveQuote(); renderList(); });
+}
+$("#list-body").addEventListener("click", e => { const b = e.target.closest(".rm"); if(!b) return; quote.splice(+b.dataset.i,1); saveQuote(); renderList(); });
+$$(".js-open-list").forEach(b => b.addEventListener("click", () => {
+  lastFocus = document.activeElement; renderList();
+  $("#list-bd").classList.add("open"); $("#list-bd").setAttribute("aria-hidden","false"); document.body.style.overflow = "hidden";
+  setTimeout(() => $("#list-close").focus(), 60);
+}));
+$("#list-close").addEventListener("click", () => closeBd("#list-bd"));
+
+/* Fermer en touchant le fond ou avec Échap */
+$$(".backdrop").forEach(bd => bd.addEventListener("click", e => { if(e.target === bd) closeBd("#" + bd.id); }));
+document.addEventListener("keydown", e => { if(e.key === "Escape"){ closeBd("#sheet-bd"); closeBd("#list-bd"); } });
+
+/* =====================================================================
+   DEMANDE SUR MESURE
+   ===================================================================== */
+$("#custom-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const g = id => $(id).value.trim();
+  if(!g("#c-brand") || !g("#c-model") || !g("#c-part")){
+    $("#c-hint").textContent = "Indiquez au moins la marque, le modèle et la pièce recherchée.";
+    $("#c-hint").style.color = "#FFC21A";
+    (!g("#c-brand") ? $("#c-brand") : !g("#c-model") ? $("#c-model") : $("#c-part")).focus();
+    return;
+  }
+  const L = [`Bonjour ${CONFIG.marque}, je cherche une pièce qui n'est pas sur le site :`, "", `*${g("#c-part")}*`, `Véhicule : ${g("#c-brand")} ${g("#c-model")}${g("#c-year") ? ", année " + g("#c-year") : ""}`];
+  if(g("#c-note")) L.push(`Détails : ${g("#c-note")}`);
+  if(g("#c-city")) L.push("", `Ville : ${g("#c-city")}`);
+  L.push("", "Je vous envoie une photo de la pièce ici.");
+  const url = waLink(L.join("\n"));
+  const a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove();
+  $("#c-hint").style.color = ""; $("#c-hint").textContent = "WhatsApp s'ouvre avec votre demande. Pensez à joindre une photo.";
+});
+
+$("#grid").innerHTML = `<div class="empty"><b>Chargement du catalogue…</b></div>`;
+fetch("catalogue.json").then(r => { if(!r.ok) throw new Error(r.status); return r.json(); }).then(initCatalog).catch(() => {
+  $("#grid").innerHTML = `<div class="empty"><b>Le catalogue n'a pas pu se charger.</b><p>Vérifiez votre connexion puis rechargez la page, ou écrivez-nous directement sur WhatsApp.</p></div>`;
+});
+</script>
+</body>
+</html>
